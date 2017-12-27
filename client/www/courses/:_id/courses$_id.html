@@ -4,28 +4,28 @@
             <div class="ui label">
                 Document ID
             </div>
-            <input type="text" readonly="readonly" id="id_courses$_id_document">
+            <input type="text" readonly="readonly" id="id_courses$_id_input_document">
         </div>
         <div class="ui hidden divider"></div>
         <div class="ui fluid input">
-            <input type="text" placeholder="http://example.com" id="id_courses$_id_url">
-            <div class="ui button" id="id_courses$_id_fetch">
+            <input type="text" placeholder="http://example.com" id="id_courses$_id_input_url">
+            <div class="ui button" id="id_courses$_id_button_fetch">
                 fetch
             </div>
         </div>
         <div class="ui hidden divider"></div>
-        <div class="ui segment">
+        <div class="ui segment" id="id_courses$_id_segment_raw">
             <label>
                 Raw HTML
             </label>
-            <textarea readonly="readonly" rows="8" id="id_courses$_id_raw"></textarea>
+            <textarea readonly="readonly" rows="8" id="id_courses$_id_textarea_raw"></textarea>
         </div>
         <div class="ui hidden divider"></div>
-        <div class="ui segment">
+        <div class="ui segment" id="id_courses$_id_segment_trim">
             <label>
                 Indexed HTML
             </label>
-            <textarea rows="24" id="id_courses$_id_trim"></textarea>
+            <textarea rows="24" id="id_courses$_id_textarea_trim"></textarea>
         </div>
         <button class="ui primary button">
             Push

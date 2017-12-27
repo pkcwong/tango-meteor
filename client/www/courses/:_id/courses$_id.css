@@ -2,10 +2,10 @@
     margin: 24px
 }
 
-[id="id_courses$_id_raw"] {
+[id="id_courses$_id_textarea_raw"] {
     min-width: 100%
 }
 
-[id="id_courses$_id_trim"] {
+[id="id_courses$_id_textarea_trim"] {
     min-width: 100%
 }
