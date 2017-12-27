@@ -22,7 +22,6 @@ Template.courses$_id.events({
 	'click #id_courses\\$_id_fetch': () => {
 
 	}
-
 });
 
 Template.courses$_id.helpers({
