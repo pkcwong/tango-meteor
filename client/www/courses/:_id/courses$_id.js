@@ -8,10 +8,6 @@ Router.route('/courses/:_id', function() {
 	});
 });
 
-Template.courses$_id.onCreated(function() {
-
-});
-
 Template.courses$_id.onRendered(function() {
 	$("#id_courses\\$_id_input_document").val(this.data['_id']);
 });
@@ -28,7 +24,23 @@ Template.courses$_id.events({
 			}
 		}, (err, res) => {
 			$('#id_courses\\$_id_textarea_raw').val(res);
-			$('#id_courses\\$_id_textarea_trim').val(jQuery(res).remove('script').text());
+			let buffer = document.createElement('div');
+			buffer.innerHTML = res;
+			{
+				let scripts = buffer.getElementsByTagName('script');
+				let i = scripts.length;
+				while (i--) {
+					scripts[i].parentNode.removeChild(scripts[i]);
+				}
+			}
+			{
+				let styles = buffer.getElementsByTagName('style');
+				let i = styles.length;
+				while (i--) {
+					styles[i].parentNode.removeChild(styles[i]);
+				}
+			}
+			$('#id_courses\\$_id_textarea_trim').val(jQuery(buffer).text());
 			$('#id_courses\\$_id_segment_raw').removeClass('loading');
 			$('#id_courses\\$_id_segment_trim').removeClass('loading');
 		});
