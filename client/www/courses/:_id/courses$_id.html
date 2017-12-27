@@ -1,0 +1,35 @@
+<template name="courses$_id">
+    <div class="courses$_id">
+        <div class="ui disabled labeled input">
+            <div class="ui label">
+                Document ID
+            </div>
+            <input type="text" id="id_courses$_id_document">
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui fluid input">
+            <input type="text" placeholder="http://example.com">
+            <div class="ui button" id="id_courses$_id_fetch">
+                fetch
+            </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <div class="ui segment">
+            <div class="ui list">
+                {{#each item in fetch}}
+                    <div class="item">
+                        <div class="ui checkbox">
+                            <input type="checkbox">
+                            <label>
+                                {{item}}
+                            </label>
+                        </div>
+                    </div>
+                {{/each}}
+                <div class="item">
+                    <textarea id="id_courses$_id_textarea" rows="12" placeholder="optional.."></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
