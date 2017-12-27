@@ -1,5 +1,4 @@
 import { Template } from 'meteor/templating';
-import { ReactiveVar } from 'meteor/reactive-var';
 
 Router.route('/courses/:_id', function() {
 	this.render('courses$_id', {
@@ -10,7 +9,7 @@ Router.route('/courses/:_id', function() {
 });
 
 Template.courses$_id.onCreated(function() {
-	this.words = new ReactiveVar([]);
+
 });
 
 Template.courses$_id.onRendered(function() {
@@ -20,14 +19,14 @@ Template.courses$_id.onRendered(function() {
 Template.courses$_id.events({
 
 	'click #id_courses\\$_id_fetch': () => {
-
+		Meteor.call('browser', {
+			method: 'get',
+			params: {
+				url: $('#id_courses\\$_id_url').val()
+			}
+		}, (err, res) => {
+			$('#id_courses\\$_id_raw').val(res);
+			$('#id_courses\\$_id_trim').val(jQuery(res).text());
+		});
 	}
-});
-
-Template.courses$_id.helpers({
-
-	fetch: () => {
-		return Template.instance().words.get();
-	}
-
 });
