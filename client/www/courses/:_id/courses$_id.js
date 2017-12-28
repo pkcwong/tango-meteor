@@ -44,5 +44,10 @@ Template.courses$_id.events({
 			$('#id_courses\\$_id_segment_raw').removeClass('loading');
 			$('#id_courses\\$_id_segment_trim').removeClass('loading');
 		});
+	},
+
+	'click #id_courses\\$_id_button_push': () => {
+
 	}
+
 });
