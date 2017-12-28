@@ -7,7 +7,7 @@ export const Course = {
 	},
 
 	query: (json) => {
-		return course_db.find(json['params']['query'], json['params']['projection']).fetch();
+		return course_db.find(json['query'], json['projection']).fetch();
 	}
 
 };
