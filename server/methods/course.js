@@ -11,8 +11,17 @@ Meteor.methods({
 				case 'query':
 					resolve(Course.query(json['params']));
 					break;
+				case 'put':
+					resolve(Course.query(json['params']));
+					break;
+				case 'update':
+					resolve(Course.update(json['params']));
+					break;
+				case 'delete':
+					resolve(Course.delete(json['params']));
+					break;
 				default:
-					reject(Meteor.Error)
+					reject(Meteor.Error);
 			}
 		});
 	}

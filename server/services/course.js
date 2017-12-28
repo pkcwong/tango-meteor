@@ -8,6 +8,20 @@ export const Course = {
 
 	query: (json) => {
 		return course_db.find(json['query'], json['projection']).fetch();
+	},
+
+	put: (json) => {
+		return {
+			_id: course_db.insert(json)
+		};
+	},
+
+	update: (json) => {
+
+	},
+
+	delete: (json) => {
+
 	}
 
 };
