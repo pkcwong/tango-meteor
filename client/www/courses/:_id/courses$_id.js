@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 Router.route('/courses/:_id', function() {
 	this.render('courses$_id', {
@@ -6,6 +7,14 @@ Router.route('/courses/:_id', function() {
 			_id: this.params['_id']
 		}
 	});
+});
+
+Template.courses$_id.onCreated(function() {
+	this.data['course ']= {
+		url: new ReactiveVar(''),
+		raw: new ReactiveVar(''),
+		trim: new ReactiveVar('')
+	};
 });
 
 Template.courses$_id.onRendered(function() {
@@ -20,6 +29,9 @@ Template.courses$_id.onRendered(function() {
 			}
 		}, (err, res) => {
 			if (res) {
+				this.data['course']['url'].set(res['url']);
+				this.data['course']['raw'].set(res['raw']);
+				this.data['course']['trim'].set(res['trim']);
 				$("#id_courses\\$_id_input_url").val(res['url']);
 				$("#id_courses\\$_id_textarea_raw").val(res['raw']);
 				$("#id_courses\\$_id_textarea_trim").val(res['trim']);
