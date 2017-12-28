@@ -7,6 +7,12 @@ export const Course = {
 	},
 
 	query: (json) => {
+		return course_db.findOne({
+			_id: json['_id']
+		});
+	},
+
+	filter: (json) => {
 		return course_db.find(json['query'], json['projection']).fetch();
 	},
 

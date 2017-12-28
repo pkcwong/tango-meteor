@@ -11,8 +11,11 @@ Meteor.methods({
 				case 'query':
 					resolve(Course.query(json['params']));
 					break;
+				case 'filter':
+					resolve(Course.filter(json['params']));
+					break;
 				case 'put':
-					resolve(Course.query(json['params']));
+					resolve(Course.put(json['params']));
 					break;
 				case 'update':
 					resolve(Course.update(json['params']));

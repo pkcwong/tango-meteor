@@ -10,6 +10,26 @@ Router.route('/courses/:_id', function() {
 
 Template.courses$_id.onRendered(function() {
 	$("#id_courses\\$_id_input_document").val(this.data['_id']);
+	if (this.data['_id'] !== '0') {
+		$('#id_courses\\$_id_segment_raw').addClass('loading');
+		$('#id_courses\\$_id_segment_trim').addClass('loading');
+		Meteor.call('course', {
+			method: 'query',
+			params: {
+				_id: this.data['_id']
+			}
+		}, (err, res) => {
+			if (res) {
+				$("#id_courses\\$_id_input_url").val(res['url']);
+				$("#id_courses\\$_id_textarea_raw").val(res['raw']);
+				$("#id_courses\\$_id_textarea_trim").val(res['trim']);
+				$("#id_courses\\$_id_segment_raw").removeClass('loading');
+				$("#id_courses\\$_id_segment_trim").removeClass('loading');
+			} else {
+				window.location = '/courses';
+			}
+		});
+	}
 });
 
 Template.courses$_id.events({
@@ -20,10 +40,10 @@ Template.courses$_id.events({
 		Meteor.call('browser', {
 			method: 'get',
 			params: {
-				url: $('#id_courses\\$_id_input_url').val()
+				url: $("#id_courses\\$_id_input_url").val()
 			}
 		}, (err, res) => {
-			$('#id_courses\\$_id_textarea_raw').val(res);
+			$("#id_courses\\$_id_textarea_raw").val(res);
 			let buffer = document.createElement('div');
 			buffer.innerHTML = res;
 			{
@@ -40,14 +60,38 @@ Template.courses$_id.events({
 					styles[i].parentNode.removeChild(styles[i]);
 				}
 			}
-			$('#id_courses\\$_id_textarea_trim').val(jQuery(buffer).text());
-			$('#id_courses\\$_id_segment_raw').removeClass('loading');
-			$('#id_courses\\$_id_segment_trim').removeClass('loading');
+			$("#id_courses\\$_id_textarea_trim").val(jQuery(buffer).text());
+			$("#id_courses\\$_id_segment_raw").removeClass('loading');
+			$("#id_courses\\$_id_segment_trim").removeClass('loading');
 		});
 	},
 
 	'click #id_courses\\$_id_button_push': () => {
-
+		const instance = Template.instance();
+		if (instance.data['_id'] !== '0') {
+			Meteor.call('course', {
+				method: 'update',
+				params: {
+					_id: instance.data['_id'],
+					url: $("#id_courses\\$_id_input_url").val(),
+					raw: $("#id_courses\\$_id_textarea_raw").val(),
+					trim: $("#id_courses\\$_id_textarea_trim").val()
+				}
+			}, (err, res) => {
+				console.log(res);
+			});
+		} else {
+			Meteor.call('course', {
+				method: 'put',
+				params: {
+					url: $("#id_courses\\$_id_input_url").val(),
+					raw: $("#id_courses\\$_id_textarea_raw").val(),
+					trim: $("#id_courses\\$_id_textarea_trim").val()
+				}
+			}, (err, res) => {
+				console.log(res);
+			});
+		}
 	}
 
 });
