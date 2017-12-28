@@ -17,11 +17,19 @@ export const Course = {
 	},
 
 	update: (json) => {
-
+		let document = json;
+		delete document['_id'];
+		return course_db.update({
+			_id: json['_id']
+		}, {
+			$set: document
+		});
 	},
 
 	delete: (json) => {
-
+		return course_db.remove({
+			_id: json['_id']
+		});
 	}
 
 };
