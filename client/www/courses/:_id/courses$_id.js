@@ -11,7 +11,6 @@ Router.route('/courses/:_id', function() {
 
 Template.courses$_id.onCreated(function() {
 	this.data['course ']= {
-		url: new ReactiveVar(''),
 		raw: new ReactiveVar(''),
 		trim: new ReactiveVar('')
 	};
@@ -29,7 +28,6 @@ Template.courses$_id.onRendered(function() {
 			}
 		}, (err, res) => {
 			if (res) {
-				this.data['course']['url'].set(res['url']);
 				this.data['course']['raw'].set(res['raw']);
 				this.data['course']['trim'].set(res['trim']);
 				$("#id_courses\\$_id_input_url").val(res['url']);
@@ -72,7 +70,7 @@ Template.courses$_id.events({
 					styles[i].parentNode.removeChild(styles[i]);
 				}
 			}
-			$("#id_courses\\$_id_textarea_trim").val(jQuery(buffer).text());
+			$("#id_courses\\$_id_textarea_trim").val(jQuery(buffer.innerHTML).text());
 			$("#id_courses\\$_id_segment_raw").removeClass('loading');
 			$("#id_courses\\$_id_segment_trim").removeClass('loading');
 		});
