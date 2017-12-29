@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import { Course } from "../services/course";
 
 Meteor.methods({
