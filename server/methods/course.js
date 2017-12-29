@@ -2,6 +2,10 @@ import { Course } from "../services/course";
 
 Meteor.methods({
 
+	/**
+	 * Meteor method for course database manipulation.
+	 * @param json {method, params}
+	 */
 	'course': (json) => {
 		return new Promise((resolve, reject) => {
 			switch (json['method']) {

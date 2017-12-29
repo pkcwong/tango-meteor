@@ -3,6 +3,10 @@ require('isomorphic-fetch');
 
 Meteor.methods({
 
+	/**
+	 * Meteor method for browser functionality.
+	 * @param json {method, params}
+	 */
 	'browser': (json) => {
 		return new Promise((resolve, reject) => {
 			switch (json['method']) {
