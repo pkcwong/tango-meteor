@@ -22,6 +22,7 @@ Template.courses.onCreated(function() {
 		}
 	}, (err, res) => {
 		this.data['course_db'].set(res);
+		this.data['filtered'].set(this.data['course_db'].get());
 	});
 });
 
