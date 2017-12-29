@@ -2,7 +2,9 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
 Router.route('/courses', function() {
-	this.render('courses');
+	this.render('courses', {
+		data: {}
+	});
 });
 
 Template.courses.onCreated(function() {
