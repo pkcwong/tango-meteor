@@ -97,6 +97,7 @@ Template.courses$_id.events({
 
 	'click #id_courses\\$_id_button_push': () => {
 		const instance = Template.instance();
+		$("#id_courses\\$_id_button_push").addClass('loading');
 		if (instance.data['_id'] !== '0') {
 			Meteor.call('course', {
 				method: 'update',
@@ -129,6 +130,21 @@ Template.courses$_id.events({
 				}
 			});
 		}
+	},
+
+	'click #id_courses\\$_id_button_delete': () => {
+		const instance = Template.instance();
+		$("#id_courses\\$_id_button_delete").addClass('loading');
+		Meteor.call('course', {
+			method: 'delete',
+			params: {
+				_id: instance.data['_id']
+			}
+		}, (err, res) => {
+			if (!err) {
+				window.location = '/courses';
+			}
+		});
 	}
 
 });
