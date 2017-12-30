@@ -50,13 +50,13 @@ Template.courses.events({
 			});
 			let result = indexer.search($('#id_courses_input_keyword').val());
 			result.forEach((item) => {
+				console.log(item);
 				buffer.push(cache[item['ref']]);
 			});
 			instance.data['filtered'].set(buffer);
 		} else {
 			instance.data['filtered'].set(instance.data['course_db'].get());
 		}
-		console.log(instance.data['filtered'].get());
 	}
 
 });

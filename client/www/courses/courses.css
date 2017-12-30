@@ -1,3 +1,12 @@
 [class="courses"] {
     margin: 24px
 }
+
+#courses_td_trim {
+    height: 150px;
+    overflow-y: scroll;
+}
+
+#courses_td_title {
+    width: 20%;
+}

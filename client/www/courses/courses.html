@@ -7,5 +7,20 @@
             <input type="text" placeholder="search.." id="id_courses_input_keyword">
             <i class="circular search link icon"></i>
         </div>
+        <div class="ui hidden divider"></div>
+        <table>
+            {{#each item in filtered}}
+                <tr>
+                    <td id="courses_td_title">
+                        <a href='/courses/{{item._id}}'>
+                            {{item.programmeTitle}}
+                        </a>
+                    </td>
+                    <td>
+                        <div id="courses_td_trim">{{item.trim}}</div>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
     </div>
 </template>
