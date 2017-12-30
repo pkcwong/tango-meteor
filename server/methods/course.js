@@ -8,30 +8,21 @@ Meteor.methods({
 	 * @param json {method, params}
 	 */
 	'course': (json) => {
-		return new Promise((resolve, reject) => {
-			switch (json['method']) {
-				case 'dump':
-					resolve(Course.dump());
-					break;
-				case 'query':
-					resolve(Course.query(json['params']));
-					break;
-				case 'filter':
-					resolve(Course.filter(json['params']));
-					break;
-				case 'put':
-					resolve(Course.put(json['params']));
-					break;
-				case 'update':
-					resolve(Course.update(json['params']));
-					break;
-				case 'delete':
-					resolve(Course.delete(json['params']));
-					break;
-				default:
-					reject(Meteor.Error);
-			}
-		});
+		switch (json['method']) {
+			case 'dump':
+				return Course.dump();
+			case 'query':
+				return Course.query(json['params']);
+			case 'filter':
+				return Course.filter(json['params']);
+			case 'put':
+				return Course.put(json['params']);
+			case 'update':
+				return Course.update(json['params']);
+			case 'delete':
+				return Course.delete(json['params']);
+		}
+		throw new Meteor.Error(null);
 	}
 
 });
