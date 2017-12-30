@@ -24,7 +24,6 @@ export const Course = {
 	 * @param json {query, projection}
 	 */
 	filter: (json) => {
-		console.log(json['projection']);
 		return course_db.find(json['query'], {
 			fields: json['projection']
 		}).fetch();

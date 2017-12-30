@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { Browser } from "../services/browser";
 
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
@@ -10,21 +11,11 @@ Meteor.methods({
 	 * @param json {method, params}
 	 */
 	'browser': (json) => {
-		return new Promise((resolve, reject) => {
-			switch (json['method']) {
-				case 'get':
-					fetch(json['params']['url']).then((response) => {
-						response.text().then((res) => {
-							resolve(res);
-						}).catch((err) => {
-							reject(err);
-						})
-					}).catch((err) => {
-						reject(err);
-					});
-			}
-		});
-
+		switch (json['method']) {
+			case 'get':
+				return Browser.get(json['params']);
+		}
+		throw new Meteor.Error(null);
 	}
 
 });
