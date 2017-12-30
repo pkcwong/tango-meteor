@@ -67,27 +67,31 @@ Template.courses$_id.events({
 				url: $("#id_courses\\$_id_input_url").val()
 			}
 		}, (err, res) => {
-			$("#id_courses\\$_id_textarea_raw").val(res);
-			let buffer = document.createElement('div');
-			buffer.innerHTML = res;
-			{
-				let scripts = buffer.getElementsByTagName('script');
-				let i = scripts.length;
-				while (i--) {
-					scripts[i].parentNode.removeChild(scripts[i]);
+			if (!err) {
+				$("#id_courses\\$_id_textarea_raw").val(res);
+				let buffer = document.createElement('div');
+				buffer.innerHTML = res;
+				{
+					let scripts = buffer.getElementsByTagName('script');
+					let i = scripts.length;
+					while (i--) {
+						scripts[i].parentNode.removeChild(scripts[i]);
+					}
 				}
-			}
-			{
-				let styles = buffer.getElementsByTagName('style');
-				let i = styles.length;
-				while (i--) {
-					styles[i].parentNode.removeChild(styles[i]);
+				{
+					let styles = buffer.getElementsByTagName('style');
+					let i = styles.length;
+					while (i--) {
+						styles[i].parentNode.removeChild(styles[i]);
+					}
 				}
+				$("#id_courses\\$_id_textarea_trim").val(jQuery(buffer.innerHTML).text());
+				$("#id_courses\\$_id_segment_raw").removeClass('loading');
+				$("#id_courses\\$_id_segment_trim").removeClass('loading');
+				checkout(instance);
+			} else {
+				console.error(err);
 			}
-			$("#id_courses\\$_id_textarea_trim").val(jQuery(buffer.innerHTML).text());
-			$("#id_courses\\$_id_segment_raw").removeClass('loading');
-			$("#id_courses\\$_id_segment_trim").removeClass('loading');
-			checkout(instance);
 		});
 	},
 
