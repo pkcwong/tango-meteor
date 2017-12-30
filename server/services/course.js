@@ -45,10 +45,11 @@ export const Course = {
 	 * @param json course
 	 */
 	update: (json) => {
+		let _id = json['_id'];
 		let document = json;
 		delete document['_id'];
 		return course_db.update({
-			_id: json['_id']
+			_id: _id
 		}, {
 			$set: document
 		});
