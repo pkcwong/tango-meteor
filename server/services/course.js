@@ -24,7 +24,10 @@ export const Course = {
 	 * @param json {query, projection}
 	 */
 	filter: (json) => {
-		return course_db.find(json['query'], json['projection']).fetch();
+		console.log(json['projection']);
+		return course_db.find(json['query'], {
+			fields: json['projection']
+		}).fetch();
 	},
 
 	/**
@@ -42,10 +45,11 @@ export const Course = {
 	 * @param json course
 	 */
 	update: (json) => {
+		let _id = json['_id'];
 		let document = json;
 		delete document['_id'];
 		return course_db.update({
-			_id: json['_id']
+			_id: _id
 		}, {
 			$set: document
 		});

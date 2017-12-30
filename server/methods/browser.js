@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
 
