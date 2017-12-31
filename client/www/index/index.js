@@ -1,6 +1,6 @@
 import { Template } from 'meteor/templating';
 
-Router.route('/index', function() {
+Router.route('/', function() {
 	this.render('index');
 });
 
