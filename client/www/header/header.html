@@ -1,0 +1,60 @@
+<template name="header">
+    <div class="header">
+        <div class="ui secondary  menu">
+            <a class="item" id="id_header_item_home">
+                Home
+            </a>
+            <a class="item" id="id_header_item_courses">
+                Courses
+            </a>
+            <div class="right menu">
+                <div class="ui dropdown item" id="id_header_dropdown_login">
+                    <i class="spy icon" id="id_header_icon_login"></i>
+                    <div class="menu" id="id_header_menu_login">
+                        <div class="item">
+                            profile
+                        </div>
+                        <button class="negative ui button" id="id_header_button_logout">
+                            sign out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="ui modal" id="id_header_modal_login">
+        <div class="header">
+            Administrator Login
+        </div>
+        <div class="image content">
+            <div class="ui medium image">
+                <i class="spy icon"></i>
+            </div>
+            <div class="description">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" placeholder="email@example.com" id="id_header_input_email">
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" placeholder="password" id="id_header_input_password">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="right">
+                <div class="ui black deny button">
+                    Cancel
+                </div>
+                <div class="ui positive right labeled icon button" id="id_header_button_login">
+                    Login
+                    <i class="checkmark icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
