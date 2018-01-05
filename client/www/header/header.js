@@ -37,6 +37,11 @@ Template.header.events({
 
 	'click #id_header_icon_login': () => {
 		$("#id_header_modal_login").modal('show');
+	},
+
+	'click #id_header_button_logout': () => {
+		Meteor.logout();
+		window.location = '/';
 	}
 
 });
