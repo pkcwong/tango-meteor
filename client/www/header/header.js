@@ -5,7 +5,7 @@ Template.header.onCreated(function() {
 });
 
 Template.header.onRendered(function() {
-	$('#id_modal_login').modal();
+	$("#id_modal_login").modal();
 	$("#id_header_dropdown_login").hover(
 		() => {
 			if (Meteor.user()) {
@@ -18,6 +18,11 @@ Template.header.onRendered(function() {
 			}
 		}
 	);
+	$("#id_header_button_login").click(() => {
+		Meteor.loginWithPassword($("#id_header_input_email").val(), $("#id_header_input_password").val(), (err) => {
+			console.error(err);
+		});
+	});
 });
 
 Template.header.events({
@@ -30,12 +35,8 @@ Template.header.events({
 		window.location = '/courses';
 	},
 
-	'click #id_header_dropdown_login': () => {
+	'click #id_header_icon_login': () => {
 		$("#id_header_modal_login").modal('show');
-	},
-
-	'click #id_header_button_login': () => {
-		Meteor.loginWithPassword($("#id_header_input_email").val(), $("#id_header_input_password").val());
 	}
 
 });
