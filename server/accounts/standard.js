@@ -1,16 +1,16 @@
 import { Accounts } from 'meteor/accounts-base';
 
-{
+Accounts.onCreateUser((user) => {
 	let exist = Meteor.users.find({
-		username: 'admin'
+		username: user['username']
 	}).count();
 	if (!exist) {
 		Accounts.createUser({
-			username: 'admin',
-			password: 'root',
+			username: user['username'],
+			password: user['password'],
 			profile: {
-				privilege: 0
+				privilege: 1
 			}
 		});
 	}
-}
+});
