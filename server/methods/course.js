@@ -16,11 +16,20 @@ Meteor.methods({
 			case 'filter':
 				return Course.filter(json['params']);
 			case 'put':
-				return Course.put(json['params']);
+				if (Meteor.user()) {
+					return Course.put(json['params']);
+				}
+				break;
 			case 'update':
-				return Course.update(json['params']);
+				if (Meteor.user()) {
+					return Course.update(json['params']);
+				}
+				break;
 			case 'delete':
-				return Course.delete(json['params']);
+				if (Meteor.user()) {
+					return Course.delete(json['params']);
+				}
+				break;
 		}
 		throw new Meteor.Error(null);
 	}
