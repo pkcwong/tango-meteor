@@ -8,6 +8,11 @@
             <input type="text" placeholder="search.." id="id_courses_input_keyword">
             <i class="circular search link icon"></i>
         </div>
+        {{#if currentUser}}
+            <button class="ui right floated primary button" id="id_courses_button_new">
+                New Record
+            </button>
+        {{/if}}
         <div class="ui hidden divider"></div>
         <table>
             {{#each item in filtered}}

@@ -56,6 +56,10 @@ Template.courses.events({
 		} else {
 			instance.data['filtered'].set(instance.data['course_db'].get());
 		}
+	},
+
+	'click #id_courses_button_new': () => {
+		window.location = '/courses/0';
 	}
 
 });
