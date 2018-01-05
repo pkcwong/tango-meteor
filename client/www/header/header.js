@@ -20,7 +20,9 @@ Template.header.onRendered(function() {
 	);
 	$("#id_header_button_login").click(() => {
 		Meteor.loginWithPassword($("#id_header_input_email").val(), $("#id_header_input_password").val(), (err) => {
-			console.error(err);
+			if (err) {
+				console.error(err);
+			}
 		});
 	});
 });
@@ -36,7 +38,9 @@ Template.header.events({
 	},
 
 	'click #id_header_icon_login': () => {
-		$("#id_header_modal_login").modal('show');
+		if (!Meteor.user()) {
+			$("#id_header_modal_login").modal('show');
+		}
 	},
 
 	'click #id_header_button_logout': () => {
