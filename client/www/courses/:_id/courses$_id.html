@@ -39,12 +39,14 @@
             </div>
         </div>
         <div class="ui hidden divider"></div>
-        <div class="ui segment" id="id_courses$_id_segment_raw">
-            <label>
-                Raw HTML
-            </label>
-            <textarea readonly="readonly" rows="8" id="id_courses$_id_textarea_raw"></textarea>
-        </div>
+        {{#if currentUser}}
+            <div class="ui segment" id="id_courses$_id_segment_raw">
+                <label>
+                    Raw HTML
+                </label>
+                <textarea readonly="readonly" rows="8" id="id_courses$_id_textarea_raw"></textarea>
+            </div>
+        {{/if}}
         <div class="ui hidden divider"></div>
         <div class="ui segment" data-position="top right" id="id_courses$_id_segment_trim">
             <label>
