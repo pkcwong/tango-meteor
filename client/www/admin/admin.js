@@ -21,7 +21,9 @@ Template.admin.onRendered(function() {
 
 });
 
-Template.admin.events({});
+Template.admin.events({
+
+});
 
 Template.admin.helpers({
 	user: () => {
