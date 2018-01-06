@@ -4,15 +4,8 @@ import { Accounts } from 'meteor/accounts-base';
 export const Root = {
 
 	/**
-	 * Dumps an entire users database.
-	 */
-	dump: () => {
-		return Meteor.users.find().fetch();
-	},
-
-	/**
 	 * Creates an administrator account.
-	 * @param params {username, password, {name}}
+	 * @param params {username, password, profile}
 	 */
 	create: (params) => {
 		if (Roles.userIsInRole(Meteor.userId(), ['root'])) {

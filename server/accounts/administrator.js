@@ -12,7 +12,7 @@ export const Administrator = {
 
 	/**
 	 * Creates a moderator account.
-	 * @param params {username, password, {name}}
+	 * @param params {username, password, profile}
 	 */
 	create: (params) => {
 		if (Roles.userIsInRole(Meteor.userId(), ['administrator'])) {
