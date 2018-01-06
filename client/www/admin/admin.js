@@ -7,7 +7,7 @@ Router.route('/admin', function() {
 });
 
 Template.admin.onCreated(function() {
-
+    this.user = new ReactiveVar([]);
 });
 
 Template.admin.onRendered(function() {
@@ -16,4 +16,8 @@ Template.admin.onRendered(function() {
 
 Template.admin.events({});
 
-Template.admin.helpers({});
+Template.admin.helpers({
+    user: () => {
+        return Template.instance().user.get();
+    }
+});
