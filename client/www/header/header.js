@@ -37,6 +37,10 @@ Template.header.events({
 		window.location = '/courses';
 	},
 
+    'click #id_header_item_users': () => {
+        window.location = '/admin';
+    },
+
 	'click #id_header_icon_login': () => {
 		if (!Meteor.user()) {
 			$("#id_header_modal_login").modal('show');

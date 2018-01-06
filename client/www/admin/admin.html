@@ -1,6 +1,25 @@
 <template name="admin">
     {{> header}}
     <div class="admin">
-
+        <table class="ui fixed striped celled table" id = "admin_userList">
+            <thead>
+            <tr>
+                <th class = six wide>User</th>
+                <th class = six wide>Action</th>
+            </tr>
+            {{#each item in user}}
+                <tr>
+                    <td>{{item.userName}}</td>
+                    <td>
+                        <div class="ui buttons">
+                            <a class = "ui button" href = '/admin/modify/{{item._id}}'>Modify</a>
+                            <div class = "or"></div>
+                            <a class = "ui negative button" id = "admin_deleteUser" href = '/admin/delete/{{item._id}}'>Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            {{/each}}
+            </thead>
+        </table>
     </div>
 </template>

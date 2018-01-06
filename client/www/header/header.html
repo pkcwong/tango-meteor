@@ -7,6 +7,11 @@
             <a class="item" id="id_header_item_courses">
                 Courses
             </a>
+            {{#if currentUser}}
+                <a class="item" id="id_header_item_users">
+                    Users
+                </a>
+            {{/if}}
             <div class="right menu">
                 <div class="ui dropdown item" id="id_header_dropdown_login">
                     <i class="spy icon" id="id_header_icon_login"></i>
