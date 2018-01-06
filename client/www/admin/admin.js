@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { ReactiveVar } from 'meteor/reactive-var';
 
 Router.route('/admin', function() {
 	this.render('admin', {
@@ -7,7 +8,13 @@ Router.route('/admin', function() {
 });
 
 Template.admin.onCreated(function() {
-    this.user = new ReactiveVar([]);
+	this.data.user = new ReactiveVar([]);
+	Meteor.call('account', {
+		method: 'dump',
+		role: 'administrator'
+	}, (err, res) => {
+		this.data.user.set(res);
+	});
 });
 
 Template.admin.onRendered(function() {
@@ -17,7 +24,7 @@ Template.admin.onRendered(function() {
 Template.admin.events({});
 
 Template.admin.helpers({
-    user: () => {
-        return Template.instance().user.get();
-    }
+	user: () => {
+		return Template.instance().data.user.get();
+	}
 });
