@@ -10,11 +10,12 @@ import { Accounts } from 'meteor/accounts-base';
 			username: 'admin'
 		});
 	}
-	Accounts.createUser({
+	let admin = Accounts.createUser({
 		username: 'admin',
 		password: 'root',
 		profile: {
-			privilege: 0
+			name: 'Administrator'
 		}
 	});
+	Roles.addUsersToRoles(admin, ['administrator'], Roles.GLOBAL_GROUP);
 }
