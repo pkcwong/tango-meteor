@@ -16,17 +16,17 @@ Meteor.methods({
 			case 'filter':
 				return Course.filter(json['params']);
 			case 'put':
-				if (Meteor.user()) {
+				if (Roles.userIsInRole(Meteor.userId(), ['moderator'])) {
 					return Course.put(json['params']);
 				}
 				break;
 			case 'update':
-				if (Meteor.user()) {
+				if (Roles.userIsInRole(Meteor.userId(), ['moderator'])) {
 					return Course.update(json['params']);
 				}
 				break;
 			case 'delete':
-				if (Meteor.user()) {
+				if (Roles.userIsInRole(Meteor.userId(), ['moderator'])) {
 					return Course.delete(json['params']);
 				}
 				break;
