@@ -8,6 +8,7 @@ Router.route('/admin', function() {
 });
 
 Template.admin.onCreated(function() {
+	$('.ui.modal')
 	this.data.user = new ReactiveVar([]);
 	Meteor.call('account', {
 		method: 'dump',
@@ -18,11 +19,28 @@ Template.admin.onCreated(function() {
 });
 
 Template.admin.onRendered(function() {
-
+	$("#admin_submit").click(() => {
+		Meteor.call('account', {
+			method: 'create',
+			params: {
+				username: $('#admin_userName').val(),
+				password: $('#admin_userPassword').val(),
+				profile: {
+					name: $('#admin_profileName').val()
+				}
+			},
+			role: 'administrator'
+		}, (err, res) => {
+			console.log(err);
+			window.location = "/admin";
+		});
+	});
 });
 
 Template.admin.events({
-
+	'click #admin_addUser': () => {
+		$('#admin_modal').modal('show')
+	}
 });
 
 Template.admin.helpers({

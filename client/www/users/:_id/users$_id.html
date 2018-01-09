@@ -1,3 +1,43 @@
 <template name="users$_id">
     {{> header}}
+        <table>
+            <tr><th>User ID</th><td>{{targetUser._id}}</td></tr>
+            <tr><th>User Name</th><td>{{targetUser.username}}</td></tr>
+            <tr><th>Profile Name</th><td>{{targetUser.profile.name}}</td></tr>
+            <tr><td><div class = "ui button" id = "user_changePassword">Change Password</div></td></tr>
+            <tr><td><div class = "ui button" id = "user_delete">Delete User</div></td></tr>
+        </table>
+
+
+    <div class = "ui basic modal" id = "user_modal">
+        <i class = "close icon"></i>
+        <div class = "header">Change Password</div>
+        <div class = "column">
+            <div class = "ui input">
+                <input type = "text" placeholder = "New Password" id = "user_newPassword">
+            </div>
+        </div>
+        <br>
+        {{#if hide}}
+            <div class = "column">
+                <div class = "ui input">
+                    <input type = "text" placeholder = "Old Password" id = "user_oldPassword">
+                </div>
+            </div>
+        {{/if}}
+        <br>
+        <div class = "actions">
+            <div class = "ui buttons">
+                <button class = "ui negative deny button">
+                    Cancel
+                </button>
+                <div class = "or"></div>
+                <button class = "ui positive right labeled icon button" id = "user_submit">
+                    Submit
+                    <i class = "checkmark icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
 </template>
