@@ -3,6 +3,22 @@
 }
 
 #admin_modal {
-    width: 200px;
+    width: 250px;
     margin: 0 0 0 -275px;
+}
+
+#admin_userName {
+    margin: 10px;
+}
+
+#admin_userPassword {
+    margin: 10px;
+}
+
+#admin_profileName {
+    margin: 10px;
+}
+
+#admin_role {
+    margin: 10px;
 }

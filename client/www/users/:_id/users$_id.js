@@ -20,6 +20,9 @@ Template.users$_id.onCreated(function() {
 		role: 'administrator'
 	}, (err, res) => {
 		this.targetUser.set(res);
+		if(!this.targetUser.get()){
+			window.location = "/admin";
+		};
 	});
 });
 
