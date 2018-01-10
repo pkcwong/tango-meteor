@@ -14,19 +14,29 @@
             </button>
         {{/if}}
         <div class="ui hidden divider"></div>
-        <table>
-            {{#each item in filtered}}
+        <table class="ui fixed striped celled table">
+            <thead>
                 <tr>
-                    <td id="courses_td_title">
-                        <a href='/courses/{{item._id}}'>
-                            {{item.programmeTitle}}
-                        </a>
-                    </td>
-                    <td>
-                        <div id="courses_td_trim">{{item.trim}}</div>
-                    </td>
+                    <th class=six wide>Programme Title</th>
+                    <th class=six wide>Institute</th>
+                    <th class=six wide>Application Deadline</th>
                 </tr>
-            {{/each}}
+                {{#each item in filtered}}
+                    <tr>
+                        <td id="courses_td_title">
+                            <a href='/courses/{{item._id}}'>
+                                {{item.programmeTitle}}
+                            </a>
+                        </td>
+                        <td>
+                            {{item.institute}}
+                        </td>
+                        <td>
+                            {{item.applicationDeadline}}
+                        </td>
+                    </tr>
+                {{/each}}
+            </thead>
         </table>
     </div>
 </template>

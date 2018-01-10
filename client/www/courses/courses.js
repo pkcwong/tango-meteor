@@ -20,7 +20,9 @@ Template.courses.onCreated(function() {
 			projection: {
 				_id: 1,
 				programmeTitle: 1,
-				trim: 1
+				trim: 1,
+				institute: 1,
+				applicationDeadline: 1
 			}
 		}
 	}, (err, res) => {
@@ -43,6 +45,7 @@ Template.courses.events({
 			let indexer = lunr(function() {
 				this.ref('_id');
 				this.field('trim');
+				this.field('institute');
 				instance.data['course_db'].get().forEach((item) => {
 					this.add(item);
 					cache[item['_id']] = item;
