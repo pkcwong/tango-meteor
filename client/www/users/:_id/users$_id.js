@@ -21,7 +21,11 @@ Template.users$_id.onCreated(function() {
 	}, (err, res) => {
 		this.targetUser.set(res);
 		if(!this.targetUser.get()){
-			window.location = "/admin";
+			if(Meteor.user()){
+				this.targetUser.set(Meteor.user());
+			}else{
+				window.location = "/admin";
+			}
 		};
 	});
 });
@@ -40,7 +44,7 @@ Template.users$_id.onRendered(function() {
 				role: 'administrator'
 			}, (err, res) => {
 				console.log(err);
-				window.location = "/users/" + this.data['_id'];
+				window.location = "/admin";
 			});
 		}
 	});
@@ -64,7 +68,6 @@ Template.users$_id.events({
 			},
 			role: 'administrator'
 		}, (err, res) => {
-			console.log(123);
 			window.location = "/admin";
 		});
 	}
@@ -75,7 +78,7 @@ Template.users$_id.helpers({
 		return Template.instance().targetUser.get();
 	},
 	hide: () => {
-		if(Meteor.userId() == this.data['_id']){
+		if(Meteor.userId() == Template.instance().data['_id']){
 			return true;
 		}else{
 			return false;

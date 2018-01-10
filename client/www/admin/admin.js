@@ -16,7 +16,11 @@ Template.admin.onCreated(function() {
 	}, (err, res) => {
 		this.data.user.set(res);
 		if(!this.data.user.get()){
-			window.location = "/";
+			if(Meteor.user()){
+				window.location = "/users/" + Meteor.userId();
+			}else{
+				window.location = "/";
+			}
 		};
 	});
 
