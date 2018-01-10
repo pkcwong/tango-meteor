@@ -54,12 +54,14 @@
             </label>
             <textarea rows="24" id="id_courses$_id_textarea_trim"></textarea>
         </div>
-        <button class="ui primary button" id="id_courses$_id_button_push">
-            Push
-        </button>
-        <button class="ui negative button" id="id_courses$_id_button_delete">
-            Delete
-        </button>
+        {{#if currentUser}}
+            <button class="ui primary button" id="id_courses$_id_button_push">
+                Push
+            </button>
+            <button class="ui negative button" id="id_courses$_id_button_delete">
+                Delete
+            </button>
+        {{/if}}
     </div>
     <div class="ui popup hidden" id="id_courses$_id_popup_checkout">
         {{added}} additions and {{removed}} deletions.

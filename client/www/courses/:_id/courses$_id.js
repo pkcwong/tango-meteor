@@ -59,41 +59,45 @@ Template.courses$_id.onRendered(function() {
 Template.courses$_id.events({
 
 	'click #id_courses\\$_id_button_fetch': () => {
-		const instance = Template.instance();
-		$("#id_courses\\$_id_segment_raw").addClass('loading');
-		$("#id_courses\\$_id_segment_trim").addClass('loading');
-		Meteor.call('browser', {
-			method: 'get',
-			params: {
-				url: $("#id_courses\\$_id_input_url").val()
-			}
-		}, (err, res) => {
-			if (!err) {
-				$("#id_courses\\$_id_textarea_raw").val(res);
-				let buffer = document.createElement('div');
-				buffer.innerHTML = res;
-				{
-					let scripts = buffer.getElementsByTagName('script');
-					let i = scripts.length;
-					while (i--) {
-						scripts[i].parentNode.removeChild(scripts[i]);
-					}
+		if (Meteor.user()) {
+			const instance = Template.instance();
+			$("#id_courses\\$_id_segment_raw").addClass('loading');
+			$("#id_courses\\$_id_segment_trim").addClass('loading');
+			Meteor.call('browser', {
+				method: 'get',
+				params: {
+					url: $("#id_courses\\$_id_input_url").val()
 				}
-				{
-					let styles = buffer.getElementsByTagName('style');
-					let i = styles.length;
-					while (i--) {
-						styles[i].parentNode.removeChild(styles[i]);
+			}, (err, res) => {
+				if (!err) {
+					$("#id_courses\\$_id_textarea_raw").val(res);
+					let buffer = document.createElement('div');
+					buffer.innerHTML = res;
+					{
+						let scripts = buffer.getElementsByTagName('script');
+						let i = scripts.length;
+						while (i--) {
+							scripts[i].parentNode.removeChild(scripts[i]);
+						}
 					}
+					{
+						let styles = buffer.getElementsByTagName('style');
+						let i = styles.length;
+						while (i--) {
+							styles[i].parentNode.removeChild(styles[i]);
+						}
+					}
+					$("#id_courses\\$_id_textarea_trim").val(jQuery(buffer.innerHTML).text());
+					$("#id_courses\\$_id_segment_raw").removeClass('loading');
+					$("#id_courses\\$_id_segment_trim").removeClass('loading');
+					checkout(instance);
+				} else {
+					console.error(err);
 				}
-				$("#id_courses\\$_id_textarea_trim").val(jQuery(buffer.innerHTML).text());
-				$("#id_courses\\$_id_segment_raw").removeClass('loading');
-				$("#id_courses\\$_id_segment_trim").removeClass('loading');
-				checkout(instance);
-			} else {
-				console.error(err);
-			}
-		});
+			});
+		} else {
+			window.open($("#id_courses\\$_id_input_url").val());
+		}
 	},
 
 	'input #id_courses\\$_id_textarea_trim': () => {
