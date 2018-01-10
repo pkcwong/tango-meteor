@@ -9,3 +9,11 @@
 [id="id_courses$_id_textarea_trim"] {
     min-width: 100%
 }
+
+#courses_id_label {
+    width: 200px;
+}
+
+#courses_id_input {
+   margin: 5px;
+}

@@ -15,7 +15,15 @@ Template.admin.onCreated(function() {
 		role: 'administrator'
 	}, (err, res) => {
 		this.data.user.set(res);
+		if(!this.data.user.get()){
+			if(Meteor.user()){
+				window.location = "/users/" + Meteor.userId();
+			}else{
+				window.location = "/";
+			}
+		};
 	});
+
 });
 
 Template.admin.onRendered(function() {
@@ -29,7 +37,7 @@ Template.admin.onRendered(function() {
 					name: $('#admin_profileName').val()
 				}
 			},
-			role: 'administrator'
+			role: $('#admin_role').val().toString()
 		}, (err, res) => {
 			console.log(err);
 			window.location = "/admin";

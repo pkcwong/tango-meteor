@@ -41,7 +41,7 @@ Template.header.events({
         window.location = '/admin';
     },
 
-	'click #id_header_icon_login': () => {
+	'click #id_header_dropdown_login': () => {
 		if (!Meteor.user()) {
 			$("#id_header_modal_login").modal('show');
 		}
