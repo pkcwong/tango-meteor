@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating';
+import { Accounts } from 'meteor/accounts-base';
 
 Router.route('/users/:_id', function() {
 	this.render('users$_id', {
@@ -11,30 +12,34 @@ Router.route('/users/:_id', function() {
 Template.users$_id.onCreated(function() {
 	$('.ui.modal')
 	$('.button')
-	this.targetUser = new ReactiveVar([]);
-	Meteor.call('account', {
-		method: 'query',
-		params: {
-			_id: this.data['_id']
-		},
-		role: 'administrator'
-	}, (err, res) => {
-		this.targetUser.set(res);
-		if(!this.targetUser.get()){
-			if(Meteor.user()){
-				this.targetUser.set(Meteor.user());
-			}else{
-				window.location = "/admin";
+	this.targetUser = new ReactiveVar(null);
+	if (Meteor.userId() != this.data['_id']) {
+		Meteor.call('account', {
+			method: 'query',
+			params: {
+				_id: this.data['_id']
+			},
+			role: 'administrator'
+		}, (err, res) => {
+			if (res) {
+				this.targetUser.set(res);
+			} else {
+				window.location = "/users/" + Meteor.userId();
 			}
-		};
-	});
+		});
+	}
 });
 
 Template.users$_id.onRendered(function() {
+	Accounts.onLogin(() => {
+		if (!this.targetUser.get()) {
+			this.targetUser.set(Meteor.user());
+		}
+	});
 	$("#user_submit").click(() => {
-		if(Meteor.userId() == this.data['_id']){
+		if (Meteor.userId() == this.data['_id']) {
 			Accounts.changePassword($('#user_oldPassword').val(), $('#user_newPassword').val());
-		}else{
+		} else {
 			Meteor.call('account', {
 				method: 'setPassword',
 				params: {
@@ -44,7 +49,7 @@ Template.users$_id.onRendered(function() {
 				role: 'administrator'
 			}, (err, res) => {
 				console.log(err);
-				window.location = "/admin";
+				window.location = "/users/" + this.data['_id'];
 			});
 		}
 	});
@@ -78,9 +83,9 @@ Template.users$_id.helpers({
 		return Template.instance().targetUser.get();
 	},
 	hide: () => {
-		if(Meteor.userId() == Template.instance().data['_id']){
+		if (Meteor.userId() == Template.instance().data['_id']) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
