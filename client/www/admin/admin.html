@@ -1,29 +1,58 @@
-<template name="admin">
+<template name = "admin">
     {{> header}}
-    <div class="admin">
-        <table class="ui fixed striped celled table" id="admin_userList">
+    <div class = "admin">
+        <div class = "ui button" id = "admin_addUser">Add User</div>
+        <table class = "ui fixed striped celled table" id = "admin_userList">
             <thead>
             <tr>
-                <th class=six wide>_id</th>
-                <th class=six wide>username</th>
-                <th class=six wide>profile_name</th>
-                <th class=six wide>Action</th>
+                <th class = six wide>_id</th>
+                <th class = six wide>username</th>
+                <th class = six wide>profile_name</th>
+                <th class = six wide>Modify</th>
             </tr>
             {{#each item in user}}
                 <tr>
                     <td>{{item._id}}</td>
                     <td>{{item.username}}</td>
                     <td>{{item.profile.name}}</td>
-                    <td>
-                        <div class="ui buttons">
-                            <a class="ui button" href='/users/{{item._id}}'>Modify</a>
-                            <div class="or"></div>
-                            <a class="ui negative button" id="admin_deleteUser">Delete</a>
-                        </div>
-                    </td>
+                    <td><a class = "ui button" href = '/users/{{item._id}}'>Modify</a></td>
                 </tr>
             {{/each}}
             </thead>
         </table>
+    </div>
+    <div class = "ui basic modal" id = "admin_modal">
+        <i class = "close icon"></i>
+        <div class = "header">Add User</div>
+        <div class = "column">
+            <div class = "ui input">
+                <input type = "text" placeholder = "Login Name" id = "admin_userName">
+            </div>
+        </div>
+        <br>
+        <div class = "column">
+            <div class = "ui input">
+                <input type = "text" placeholder = "User Password" id = "admin_userPassword">
+            </div>
+        </div>
+        <br>
+        <div class = "column">
+            <div class = "ui input">
+                <input type = "text" placeholder = "Profile Name" id = "admin_profileName">
+            </div>
+        </div>
+        <br>
+        <div class = "actions">
+            <div class = "ui buttons">
+                <button class = "ui negative deny button">
+                    Cancel
+                </button>
+                <div class = "or"></div>
+                <button class = "ui positive right labeled icon button" id = "admin_submit">
+                    Submit
+                    <i class = "checkmark icon"></i>
+                </button>
+            </div>
+        </div>
     </div>
 </template>

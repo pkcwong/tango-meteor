@@ -7,7 +7,21 @@ export const Administrator = {
 	 * Dumps an entire users database.
 	 */
 	dump: () => {
-		return Meteor.users.find().fetch();
+		if (Roles.userIsInRole(Meteor.userId(), ['administrator'])) {
+			return Meteor.users.find().fetch();
+		}
+	},
+
+	/**
+	 * Fetches a user based on given _id.
+	 * @param params {_id}
+	 */
+	query: (params) => {
+		if (Roles.userIsInRole(Meteor.userId(), ['administrator'])) {
+			return Meteor.users.findOne({
+				_id: params['_id']
+			});
+		}
 	},
 
 	/**
@@ -35,6 +49,18 @@ export const Administrator = {
 				Meteor.users.remove({
 					_id: params['_id']
 				});
+			}
+		}
+	},
+
+	/**
+	 * Sets a password forcibly for a user for a given _id.
+	 * @param params {_id, password}
+	 */
+	setPassword: (params) => {
+		if (Roles.userIsInRole(Meteor.userId()), ['administrator']) {
+			if (!Roles.userIsInRole(params['_id'], ['root'])) {
+				Accounts.setPassword(params['_id'], params['password']);
 			}
 		}
 	}

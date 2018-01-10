@@ -9,6 +9,8 @@ Meteor.methods({
 		switch (json['method']) {
 			case 'dump':
 				return Administrator.dump();
+			case 'query':
+				return Administrator.query(json['params']);
 			case 'create':
 				switch (json['role']) {
 					case 'root':
@@ -17,9 +19,11 @@ Meteor.methods({
 						return Administrator.create(json['params']);
 				}
 			case 'remove':
-				return Administrator.create(json['params']);
+				return Administrator.remove(json['params']);
 			case 'update':
 				return Moderator.update(json['params']);
+			case 'setPassowrd':
+				return Administrator.setPassword(json['params']);
 		}
 		throw new Meteor.Error(null);
 	}
